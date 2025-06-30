@@ -5,59 +5,402 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Plano de Estudos 10 Meses - Fullstack + DevOps</title>
 <style>
-  *{box-sizing:border-box}
-  body{margin:0;font-family:'Segoe UI',sans-serif;background:#121212;color:#ddd;display:flex;flex-direction:column;height:100vh;}
-  header{background:#1f1f1f;padding:1rem;text-align:center;color:#00bcd4;font-size:1.6rem;font-weight:700;box-shadow:0 2px 5px #0009;}
-  main{flex:1;display:flex;max-width:1200px;margin:10px auto;background:#222;border-radius:8px;overflow:hidden;box-shadow:0 0 15px #00bcd4aa;}
-  nav{width:260px;background:#1b1b1b;overflow-y:auto}
-  nav h2{color:#00bcd4;padding:1rem;font-weight:600;}
-  nav ul{list-style:none;padding:0;margin:0;}
-  nav li{padding:12px 20px;color:#bbb;cursor:pointer;border-bottom:1px solid #333;transition:background .2s;}
-  nav li.active,nav li:hover{background:#00bcd4;color:#121212;font-weight:700;}
-  section#content{flex:1;overflow-y:auto;padding:20px;}
-  section#content h2{color:#00bcd4;margin-top:0;font-weight:700;}
-  .week{margin-bottom:1.5rem;}
-  .week-header{font-weight:600;color:#a0d8ef;border-bottom:2px solid #00bcd4;padding-bottom:4px;margin-bottom:10px;}
-  .day-card{background:#282828;border-radius:6px;margin-bottom:8px;padding:6px 12px;}
-  .day-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:#00bcd4;font-weight:600;}
-  .toggle-icon{transition:transform .3s ease;font-weight:700;}
-  .toggle-icon.open{transform:rotate(90deg);}
-  .day-content{max-height:0;overflow:hidden;transition:max-height .4s ease;margin-top:0;}
-  .day-content.open{max-height:400px;margin-top:8px;}
-  .lesson-link{width:100%;padding:6px;border:none;border-radius:4px;background:#111;color:#ddd;margin-bottom:8px;}
-  .lesson-link::placeholder{color:#555;}
-  .lesson-link:focus{outline:2px solid #00bcd4;background:#222;}
-  .ai-tip{background:#004d66;color:#b2f7ff;padding:8px;border-radius:4px;font-style:italic;font-size:.9rem;}
-  label{display:flex;align-items:center;gap:8px;font-weight:500;margin-bottom:8px;}
-  input[type="checkbox"]{width:18px;height:18px;}
-  #overall-progress{background:#1f1f1f;color:#00bcd4;padding:10px;border-radius:6px;margin-bottom:12px;text-align:center;font-weight:600;box-shadow:inset 0 0 8px #00bcd4;}
-  a.lesson-link-tag{display:inline-block;margin-bottom:8px;color:#00bcd4;font-weight:600;text-decoration:none;}
-  a.lesson-link-tag:hover{text-decoration:underline;}
-
-   /* New Styles for Study Tracking */
-  #study-tracking {
-  background: #1b1b1b;
-  padding: 1rem;
-  margin: 10px;
-  border-radius: 8px;
-  color: #ddd;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
   }
-
-  #study-tracking h2 {
-  color: #00bcd4;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  
+  body {
+    background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+    color: #f0f0f0;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
-
-  #study-days, #rest-days {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  
+  header {
+    background: linear-gradient(90deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    padding: 1.5rem;
+    text-align: center;
+    color: #00d4ff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 180, 212, 0.3);
+    position: relative;
+    overflow: hidden;
   }
-
+  
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      rgba(0, 212, 255, 0.1) 0%, 
+      rgba(0, 212, 255, 0.05) 50%, 
+      rgba(0, 212, 255, 0.1) 100%);
+    pointer-events: none;
+  }
+  
+  main {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: rgba(34, 34, 34, 0.9);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 180, 212, 0.4);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    min-height: 80vh;
+  }
+  
+  nav {
+    width: 280px;
+    background: linear-gradient(180deg, #1b1b1b 0%, #121212 100%);
+    overflow-y: auto;
+    border-right: 1px solid rgba(0, 212, 255, 0.1);
+  }
+  
+  nav h2 {
+    color: #00d4ff;
+    padding: 1.2rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    padding: 14px 20px;
+    color: #bbb;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  nav li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 212, 255, 0.1) 50%, 
+      transparent 100%);
+    transition: all 0.5s;
+  }
+  
+  nav li:hover::before {
+    left: 100%;
+  }
+  
+  nav li.active, nav li:hover {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 180, 212, 0.3) 100%);
+    color: #fff;
+    font-weight: 600;
+    padding-left: 25px;
+  }
+  
+  section#content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px;
+    background: rgba(40, 40, 40, 0.7);
+  }
+  
+  section#content h2 {
+    color: #00d4ff;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+  }
+  
+  .week {
+    margin-bottom: 2rem;
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .week:hover {
+    box-shadow: 0 6px 12px rgba(0, 180, 212, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .week-header {
+    font-weight: 600;
+    color: #a0d8ef;
+    border-bottom: 2px solid #00d4ff;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .week-toggle {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .week-toggle.open {
+    transform: rotate(90deg);
+  }
+  
+  .week-content {
+    display: none;
+  }
+  
+  .week-content.open {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .day-card {
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+  
+  .day-card:hover {
+    background: rgba(50, 50, 50, 0.9);
+    border-left: 3px solid #00d4ff;
+    transform: translateX(5px);
+  }
+  
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #00d4ff;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .toggle-icon {
+    transition: transform 0.3s ease;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  
+  .toggle-icon.open {
+    transform: rotate(90deg);
+  }
+  
+  .day-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    margin-top: 0;
+  }
+  
+  .day-content.open {
+    max-height: 500px;
+    margin-top: 12px;
+  }
+  
+  .day-detail {
+    color: #ccc;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .lesson-link {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(20, 20, 20, 0.8);
+    color: #ddd;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+  }
+  
+  .lesson-link:focus {
+    outline: none;
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid #00d4ff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+  }
+  
+  .ai-tip {
+    background: rgba(0, 77, 102, 0.5);
+    color: #b2f7ff;
+    padding: 10px;
+    border-radius: 4px;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    border-left: 3px solid #00d4ff;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    margin: 15px 0 10px 0;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  label:hover {
+    color: #fff;
+  }
+  
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #00d4ff;
+    cursor: pointer;
+  }
+  
+  #overall-progress {
+    background: rgba(31, 31, 31, 0.8);
+    color: #00d4ff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: inset 0 0 10px rgba(0, 180, 212, 0.4);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #overall-progress::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--progress);
+    height: 100%;
+    background: linear-gradient(90deg, 
+      rgba(0, 212, 255, 0.1) 0%, 
+      rgba(0, 212, 255, 0.05) 100%);
+    z-index: -1;
+    transition: width 0.5s ease;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    background: rgba(0, 212, 255, 0.2);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff 0%, #0083b0 100%);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 212, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+  }
+  
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  /* Animação para os cards */
+  .day-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Efeito de digitação para o título */
+  .typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+    }
+    
+    nav {
+      width: 100%;
+      max-height: 200px;
+    }
+    
+    header {
+      font-size: 1.4rem;
+      padding: 1rem;
+    }
+    
+    section#content {
+      padding: 15px;
+    }
+    
+    .week-header {
+      font-size: 1rem;
+    }
+    
+    .day-header {
+      font-size: 1rem;
+    }
+  }
 </style>
 </head>
 <body>
-<header>📚 Plano de Estudos 8 Meses – Fullstack & DevOps</header>
+<header class="typing-effect">📚 Plano de Estudos 10 Meses – Fullstack & DevOps</header>
 <main>
   <nav><h2>Meses</h2><ul id="months-ul"></ul></nav>
   <section id="content"></section>
@@ -66,609 +409,543 @@
 const plan = [
   {title:"MÊS 1: Fundamentos (HTML/CSS/JS/Git/Linux)",weeks:[
     {title:"Semana 1: HTML+CSS+Git",days:[
-      {day:1,topic:"HTML Básico",detail:"Estrutura, tags, formulários",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n"},
-      {day:2,topic:"CSS Básico",detail:"Seletores, box model",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n"},
-      {day:3,topic:"CSS Flexbox",detail:"Layout flexível",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n"},
-      {day:4,topic:"CSS Grid",detail:"Layouts avançados",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n"},
-      {day:5,topic:"Git Básico",detail:"git init, commit, push",link:"https://www.youtube.com/watch?v=8JJ101D3knE"},
-      {day:6,topic:"Projeto HTML/CSS",detail:"Página pessoal estática",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n"},
-      {day:7,topic:"Revisão",detail:"Ajustes e melhorias",link:""}
+      {day:1,topic:"HTML Básico",detail:"Estrutura, tags, formulários"},
+      {day:2,topic:"CSS Básico",detail:"Seletores, box model"},
+      {day:3,topic:"CSS Flexbox",detail:"Layout flexível"},
+      {day:4,topic:"CSS Grid",detail:"Layouts avançados"},
+      {day:5,topic:"Git Básico",detail:"git init, commit, push"},
+      {day:6,topic:"Projeto HTML/CSS",detail:"Página pessoal estática"},
+      {day:7,topic:"Revisão",detail:"Ajustes e melhorias"}
     ]},
     {title:"Semana 2: JavaScript Básico",days:[
-      {day:8,topic:"JS Sintaxe",detail:"Variáveis, loops, funções",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1"},
-      {day:9,topic:"DOM e Eventos",detail:"Manipulação de DOM",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1"},
-      {day:10,topic:"Arrays e Objetos",detail:"map, filter, reduce",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1"},
-      {day:11,topic:"Fetch API",detail:"Consumir APIs",link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1"},
-      {day:12,topic:"Mini-Projeto To-Do",detail:"JS interativo",link:""},
-      {day:13,topic:"Revisão JS",detail:"Exercícios",link:""},
-      {day:14,topic:"Projeto Final",detail:"Portfólio pessoal",link:""}
+      {day:8,topic:"JS Sintaxe",detail:"Variáveis, loops, funções"},
+      {day:9,topic:"DOM e Eventos",detail:"Manipulação de DOM"},
+      {day:10,topic:"Arrays e Objetos",detail:"map, filter, reduce"},
+      {day:11,topic:"Fetch API",detail:"Consumir APIs"},
+      {day:12,topic:"Mini-Projeto To-Do",detail:"JS interativo"},
+      {day:13,topic:"Revisão JS",detail:"Exercícios"},
+      {day:14,topic:"Projeto Final",detail:"Portfólio pessoal"}
     ]},
-
-    {
-          title: "Semana 3: Avançando no JavaScript",
-          days: [
-            { day: 15, topic: "Funções Avançadas", detail: "Callbacks, Arrow Functions", video: "https://www.youtube.com/watch?v=3PHXvlpOkf4" },
-            { day: 16, topic: "Objetos e Prototipagem", detail: "Herança e protótipos JS", video: "https://www.youtube.com/watch?v=GhbhD1HR5vk" },
-            { day: 17, topic: "Eventos e Manipulação DOM", detail: "Eventos avançados", video: "https://www.youtube.com/watch?v=H9_2_yWq6BM" },
-            { day: 18, topic: "Fetch API e Promises", detail: "Requisições assíncronas", video: "https://www.youtube.com/watch?v=cuEtnrL9-H0" },
-            { day: 19, topic: "Async/Await", detail: "Async programming moderno", video: "https://www.youtube.com/watch?v=V_Kr9OSfDeU" },
-            { day: 20, topic: "Manipulação Avançada de Arrays", detail: "Métodos funcionais", video: "https://www.youtube.com/watch?v=R8rmfD9Y5-c" },
-            { day: 21, topic: "Revisão e Exercícios", detail: "Prática e desafios", video: "" }
-          ]
-        },
-        {
-          title: "Semana 4: Introdução a Linux e Terminal",
-          days: [
-            { day: 22, topic: "Linux Básico", detail: "Comandos essenciais e navegação", video: "https://www.youtube.com/watch?v=IVquJh3DXUA" },
-            { day: 23, topic: "Permissões e Arquivos", detail: "chmod, chown, arquivos", video: "https://www.youtube.com/watch?v=0bG_L3-SnX0" },
-            { day: 24, topic: "Processos e Serviços", detail: "Gerenciamento de processos", video: "https://www.youtube.com/watch?v=l7lyL5_Rj5k" },
-            { day: 25, topic: "Shell scripting básico", detail: "Automatização simples", video: "https://www.youtube.com/watch?v=v-F3YLd6oMw" },
-            { day: 26, topic: "Git Avançado", detail: "Branches, merges, rebase", video: "https://www.youtube.com/watch?v=SWYqp7iY_Tc" },
-            { day: 27, topic: "Trabalho com GitHub", detail: "Pull requests e revisão", video: "https://www.youtube.com/watch?v=nhNq2kIvi9s" },
-            { day: 28, topic: "Projeto Semana Linux + Git", detail: "Configuração ambiente", video: "" }
-          ]
-        }
-
+    {title:"Semana 3: Avançando no JavaScript",days:[
+      {day:15,topic:"Funções Avançadas",detail:"Callbacks, Arrow Functions"},
+      {day:16,topic:"Objetos e Prototipagem",detail:"Herança e protótipos JS"},
+      {day:17,topic:"Eventos e Manipulação DOM",detail:"Eventos avançados"},
+      {day:18,topic:"Fetch API e Promises",detail:"Requisições assíncronas"},
+      {day:19,topic:"Async/Await",detail:"Async programming moderno"},
+      {day:20,topic:"Manipulação Avançada de Arrays",detail:"Métodos funcionais"},
+      {day:21,topic:"Revisão e Exercícios",detail:"Prática e desafios"}
+    ]},
+    {title:"Semana 4: Introdução a Linux e Terminal",days:[
+      {day:22,topic:"Linux Básico",detail:"Comandos essenciais e navegação"},
+      {day:23,topic:"Permissões e Arquivos",detail:"chmod, chown, arquivos"},
+      {day:24,topic:"Processos e Serviços",detail:"Gerenciamento de processos"},
+      {day:25,topic:"Shell scripting básico",detail:"Automatização simples"},
+      {day:26,topic:"Git Avançado",detail:"Branches, merges, rebase"},
+      {day:27,topic:"Trabalho com GitHub",detail:"Pull requests e revisão"},
+      {day:28,topic:"Projeto Semana Linux + Git",detail:"Configuração ambiente"}
+    ]}
   ]},
-
-{
-  "title": "MÊS 2: Angular + Vue.js Intensivo",
-  "weeks": [
-    {
-      "title": "Semana 1: Fundamentos Angular",
-      "days": [
-        {"day": 1, "topic": "Introdução Angular", "detail": "O que é SPA, Angular CLI, Estrutura de Projeto, Primeiro Componente", "link": "https://angular.io/start"},
-        {"day": 2, "topic": "Componentes, Templates, Diretivas", "detail": "Componentes, Data Binding, Diretivas *ngIf e *ngFor", "link": "https://angular.io/guide/displaying-data"},
-        {"day": 3, "topic": "Pipes, Serviços, Injeção", "detail": "Pipes, Serviços, DI e Providers", "link": "https://angular.io/guide/pipes"},
-        {"day": 4, "topic": "Rotas e Navegação", "detail": "RouterModule, parâmetros, rotas filhas, lazy loading", "link": "https://angular.io/guide/router"},
-        {"day": 5, "topic": "Formulários", "detail": "Forms template-driven e reativos, validações", "link": "https://angular.io/guide/forms-overview"},
-        {"day": 6, "topic": "HTTP e Observables", "detail": "HttpClient, CRUD, RxJS básico", "link": "https://angular.io/guide/http"},
-        {"day": 7, "topic": "Guards e Projeto Prático 1", "detail": "Guards, Interceptors, mini app com autenticação", "link": ""}
-      ]
-    },
-    {
-      "title": "Semana 2: Angular Avançado",
-      "days": [
-        {"day": 8, "topic": "Comunicação entre Componentes", "detail": "@Input, @Output, serviços compartilhados", "link": "https://angular.io/guide/component-interaction"},
-        {"day": 9, "topic": "RxJS Avançado", "detail": "Subjects, BehaviorSubject, switchMap, debounceTime", "link": "https://rxjs.dev/"},
-        {"day": 10, "topic": "Testes em Angular", "detail": "Jasmine, Karma, TestBed, mocks de serviços", "link": "https://angular.io/guide/testing"},
-        {"day": 11, "topic": "Performance e Acessibilidade", "detail": "ChangeDetection, trackBy, i18n, a11y", "link": "https://angular.io/guide/accessibility"},
-        {"day": 12, "topic": "Projeto Angular Final", "detail": "Dashboard com login, API externa, deploy", "link": ""},
-        {"day": 13, "topic": "Revisão Angular", "detail": "Checklist de aprendizado, revisão de conceitos", "link": ""},
-        {"day": 14, "topic": "Extras / Reposição", "detail": "Tempo livre ou reforço", "link": ""}
-      ]
-    },
-    {
-      "title": "Semana 3: Fundamentos Vue.js",
-      "days": [
-        {"day": 15, "topic": "Introdução Vue.js", "detail": "CLI, Vite, estrutura, primeiro componente", "link": "https://vuejs.org/guide/quick-start.html"},
-        {"day": 16, "topic": "Diretivas Vue", "detail": "v-if, v-for, v-bind, v-model, eventos", "link": "https://vuejs.org/guide/essentials/template-syntax.html"},
-        {"day": 17, "topic": "Componentes e Props", "detail": "Props, eventos personalizados, slots", "link": "https://vuejs.org/guide/components/props.html"},
-        {"day": 18, "topic": "Reatividade e Lifecycle", "detail": "ref, reactive, computed, watch, hooks", "link": "https://vuejs.org/guide/essentials/reactivity-fundamentals.html"},
-        {"day": 19, "topic": "Vue Router", "detail": "Rotas, parâmetros, nested, guards", "link": "https://router.vuejs.org/"},
-        {"day": 20, "topic": "Pinia (Vuex) e Projeto", "detail": "Store, state global, projeto com login e API fake", "link": "https://pinia.vuejs.org/"},
-        {"day": 21, "topic": "Revisão Vue Básico", "detail": "Resumo geral, checklist, refatorações", "link": ""}
-      ]
-    },
-    {
-      "title": "Semana 4: Vue.js Avançado",
-      "days": [
-        {"day": 22, "topic": "Composition API", "detail": "setup, ref, reactive, provide/inject, composables", "link": "https://vuejs.org/guide/extras/composition-api-faq.html"},
-        {"day": 23, "topic": "Consumo de API", "detail": "Axios, autenticação JWT, interceptors", "link": "https://axios-http.com/"},
-        {"day": 24, "topic": "Performance Vue", "detail": "Lazy loading, suspense, divisão de bundles", "link": "https://vuejs.org/guide/best-practices/performance.html"},
-        {"day": 25, "topic": "Testes em Vue", "detail": "Vue Test Utils, mocks, cobertura de componentes", "link": "https://test-utils.vuejs.org/"},
-        {"day": 26, "topic": "Projeto Vue Final", "detail": "Dashboard com login, API externa, deploy", "link": ""},
-        {"day": 27, "topic": "Revisão Vue Avançado", "detail": "Checklist, ajustes, publicação no GitHub", "link": ""},
-        {"day": 28, "topic": "Extras / Reposição", "detail": "Estudos extras: Nuxt, Vuetify, animações", "link": "https://nuxt.com/"}
-      ]
-    }
-  ]
-},
-
-
-  {
-    title: "MÊS 3 – JavaScript Intermediário, APIs REST e React Básico",
-    weeks: [
-      {
-        title: "Semana 1: JavaScript Avançado",
-        days: [
-          { day: 29, topic: "ES6+ Features", detail: "Destructuring, Spread, Rest", video: "https://www.youtube.com/watch?v=NCwa_xi0Uuc" },
-          { day: 30, topic: "Closures e Scope", detail: "Funções internas e variáveis", video: "https://www.youtube.com/watch?v=3a0I8ICR1Vg" },
-          { day: 31, topic: "Programação Funcional", detail: "Funções puras, imutabilidade", video: "https://www.youtube.com/watch?v=e-5obm1G_FY" },
-          { day: 32, topic: "Classes em JavaScript", detail: "POO no JS", video: "https://www.youtube.com/watch?v=FvMR8cNJyHg" },
-          { day: 33, topic: "Módulos ES6", detail: "import e export", video: "https://www.youtube.com/watch?v=cRHQNNcYf6s" },
-          { day: 34, topic: "Promises e Callbacks Revisitados", detail: "Controle de fluxo assíncrono", video: "https://www.youtube.com/watch?v=DHvZLI7Db8E" },
-          { day: 35, topic: "Projeto JS Avançado", detail: "Mini app com async", video: "" }
-        ]
-      },
-      {
-        title: "Semana 2: API REST e Consumo com JS",
-        days: [
-          { day: 36, topic: "RESTful API Conceitos", detail: "Princípios REST", video: "https://www.youtube.com/watch?v=Q-BpqyOT3a8" },
-          { day: 37, topic: "JSON e AJAX", detail: "Formato JSON e requisições AJAX", video: "https://www.youtube.com/watch?v=U7UXTYU-D5s" },
-          { day: 38, topic: "Fetch API Detalhado", detail: "GET, POST, PUT, DELETE", video: "https://www.youtube.com/watch?v=Oive66jrwBs" },
-          { day: 39, topic: "Testando APIs com Postman", detail: "Uso básico do Postman", video: "https://www.youtube.com/watch?v=VywxIQ2ZXw4" },
-          { day: 40, topic: "Node.js Básico", detail: "Ambiente server-side JS", video: "https://www.youtube.com/watch?v=TlB_eWDSMt4" },
-          { day: 41, topic: "Criando Servidor Simples", detail: "HTTP com Node", video: "https://www.youtube.com/watch?v=8aGhZQkoFbQ" },
-          { day: 42, topic: "Projeto API + Frontend", detail: "Consumindo backend simples", video: "" }
-        ]
-      },
-      {
-        title: "Semana 3: React Básico",
-        days: [
-          { day: 43, topic: "Introdução ao React", detail: "Componentes, JSX", video: "https://www.youtube.com/watch?v=Ke90Tje7VS0" },
-          { day: 44, topic: "Props e State", detail: "Gerenciamento básico de dados", video: "https://www.youtube.com/watch?v=IYvD9oBCuJI" },
-          { day: 45, topic: "Eventos em React", detail: "Manipulação de eventos", video: "https://www.youtube.com/watch?v=4UZrsTqkcW4" },
-          { day: 46, topic: "Componentes funcionais e hooks", detail: "useState, useEffect", video: "https://www.youtube.com/watch?v=0ZJgIjIuY7U" },
-          { day: 47, topic: "Formulários e validação", detail: "Controlled components", video: "https://www.youtube.com/watch?v=ZwFA3YMfkoc" },
-          { day: 48, topic: "Projeto React simples", detail: "To-do App React", video: "" },
-          { day: 49, topic: "Revisão React", detail: "Revisão e exercícios", video: "" }
-        ]
-      },
-      {
-        title: "Semana 4: Avançando React e Git",
-        days: [
-          { day: 50, topic: "React Router", detail: "Navegação SPA", video: "https://www.youtube.com/watch?v=Law7wfdg_ls" },
-          { day: 51, topic: "Context API", detail: "Gerenciamento global", video: "https://www.youtube.com/watch?v=35lXWvCuM8o" },
-          { day: 52, topic: "Hooks avançados", detail: "useReducer, useMemo", video: "https://www.youtube.com/watch?v=O6P86uwfdR0" },
-          { day: 53, topic: "Testes em React", detail: "React Testing Library", video: "https://www.youtube.com/watch?v=3e1GHCA3GP0" },
-          { day: 54, topic: "Git e Fluxo de trabalho", detail: "Feature Branch", video: "https://www.youtube.com/watch?v=1ffBJ4sVUb4" },
-          { day: 55, topic: "Deploy com Vercel", detail: "Publicando app React", video: "https://www.youtube.com/watch?v=ljQTHB5M0q8" },
-          { day: 56, topic: "Projeto Final React", detail: "SPA completa", video: "" }
-        ]
-      }
-    ]
-  },
-
-     {
-  title: "MÊS 3: Java e POO",
-  weeks: [
-    {title:"Semana 17: Java Básico e Projetos Práticos", days:[
-      {day:113, topic:"Introdução ao Java", detail:"JDK, JVM, IDE (VS Code/IntelliJ), sintaxe", link:"https://www.youtube.com/playlist?list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR"},
-      {day:114, topic:"Tipos e Operadores", detail:"Primitivos, wrappers, operadores lógicos/aritméticos", link:"https://www.youtube.com/watch?v=lLX2cqkA0qI"},
-      {day:115, topic:"Controle de Fluxo", detail:"if-else, switch, loops (for, while, forEach)", link:"https://www.youtube.com/watch?v=lLX2cqkA0qI"},
-      {day:116, topic:"Arrays e Collections", detail:"Array, ArrayList, LinkedList, métodos úteis", link:"https://www.youtube.com/watch?v=FUvCcd6tYAA"},
-      {day:117, topic:"Métodos e Funções", detail:"Parâmetros, retorno, sobrecarga, recursão", link:"https://www.youtube.com/watch?v=Yvl2NWPJkqQ"},
-      {day:118, topic:"Projeto 1: Jogo da Forca", detail:"Usar arrays, loops e métodos", link:"https://www.youtube.com/watch?v=5Q3z8cHkXo4"},
-      {day:119, topic:"Projeto 2: Agenda de Contatos", detail:"ArrayList e funções CRUD", link:"https://www.youtube.com/watch?v=vhYKXDO4pL0"}
+  {title:"MÊS 2: Angular + Vue.js Intensivo",weeks:[
+    {title:"Semana 1: Fundamentos Angular",days:[
+      {day:1,topic:"Introdução Angular",detail:"O que é SPA, Angular CLI, Estrutura de Projeto, Primeiro Componente"},
+      {day:2,topic:"Componentes, Templates, Diretivas",detail:"Componentes, Data Binding, Diretivas *ngIf e *ngFor"},
+      {day:3,topic:"Pipes, Serviços, Injeção",detail:"Pipes, Serviços, DI e Providers"},
+      {day:4,topic:"Rotas e Navegação",detail:"RouterModule, parâmetros, rotas filhas, lazy loading"},
+      {day:5,topic:"Formulários",detail:"Forms template-driven e reativos, validações"},
+      {day:6,topic:"HTTP e Observables",detail:"HttpClient, CRUD, RxJS básico"},
+      {day:7,topic:"Guards e Projeto Prático 1",detail:"Guards, Interceptors, mini app com autenticação"}
     ]},
-    {title:"Semana 18: POO e Tópicos Intermediários", days:[
-      {day:120, topic:"Classes e Objetos", detail:"Atributos, métodos, static, construtores", link:"https://www.youtube.com/watch?v=8i5m6nDjQF0"},
-      {day:121, topic:"Herança e Polimorfismo", detail:"extends, @Override, super", link:"https://www.youtube.com/watch?v=F3V-F8twU4o"},
-      {day:122, topic:"Encapsulamento", detail:"private, getters/setters, Java Beans", link:"https://www.youtube.com/watch?v=ovlx2n9r0Yw"},
-      {day:123, topic:"Interfaces e Abstract", detail:"interface, implements, classes abstratas", link:"https://www.youtube.com/watch?v=OVvIlP1rPt0"},
-      {day:124, topic:"Exceções", detail:"try-catch-finally, custom exceptions", link:"https://www.youtube.com/watch?v=I3M9RG9kWUw"},
-      {day:125, topic:"Projeto 3: Sistema Bancário", detail:"POO + herança (Conta, Corrente, Poupança)", link:"https://www.youtube.com/watch?v=6j4qNOlYQPA"},
-      {day:126, topic:"Projeto 4: Calculadora Científica", detail:"Interfaces para operações matemáticas", link:"https://www.youtube.com/watch?v=LEj1KPnWnJQ"}
+    {title:"Semana 2: Angular Avançado",days:[
+      {day:8,topic:"Comunicação entre Componentes",detail:"@Input, @Output, serviços compartilhados"},
+      {day:9,topic:"RxJS Avançado",detail:"Subjects, BehaviorSubject, switchMap, debounceTime"},
+      {day:10,topic:"Testes em Angular",detail:"Jasmine, Karma, TestBed, mocks de serviços"},
+      {day:11,topic:"Performance e Acessibilidade",detail:"ChangeDetection, trackBy, i18n, a11y"},
+      {day:12,topic:"Projeto Angular Final",detail:"Dashboard com login, API externa, deploy"},
+      {day:13,topic:"Revisão Angular",detail:"Checklist de aprendizado, revisão de conceitos"},
+      {day:14,topic:"Extras / Reposição",detail:"Tempo livre ou reforço"}
     ]},
-    {title:"Semana 19: Java Avançado e Projetos Complexos", days:[
-      {day:127, topic:"Coleções (List, Set, Map)", detail:"HashMap, TreeSet, Comparator", link:"https://www.youtube.com/watch?v=FUvCcd6tYAA"},
-      {day:128, topic:"Streams e Lambdas", detail:"filter, map, reduce, method references", link:"https://www.youtube.com/watch?v=KdE9O36LZ54"},
-      {day:129, topic:"Threads e Concorrência", detail:"Runnable, synchronized, ThreadPool", link:"https://www.youtube.com/watch?v=r_MbozD32eo"},
-      {day:130, topic:"JDBC e Banco de Dados", detail:"Conexão com MySQL/PostgreSQL, CRUD", link:"https://www.youtube.com/watch?v=8hDm9h0pN8A"},
-      {day:131, topic:"Projeto 5: To-Do List com BD", detail:"JDBC + POO + Console", link:"https://www.youtube.com/watch?v=8hDm9h0pN8A"},
-      {day:132, topic:"Projeto 6: API REST Simples", detail:"SparkJava/Javalin (HTTP básico)", link:"https://www.youtube.com/watch?v=9oeJc_VkZxo"},
-      {day:133, topic:"Maven e JUnit", detail:"Gerenciamento de dependências e testes", link:"https://www.youtube.com/watch?v=al7bRZzz4oU"}
+    {title:"Semana 3: Fundamentos Vue.js",days:[
+      {day:15,topic:"Introdução Vue.js",detail:"CLI, Vite, estrutura, primeiro componente"},
+      {day:16,topic:"Diretivas Vue",detail:"v-if, v-for, v-bind, v-model, eventos"},
+      {day:17,topic:"Componentes e Props",detail:"Props, eventos personalizados, slots"},
+      {day:18,topic:"Reatividade e Lifecycle",detail:"ref, reactive, computed, watch, hooks"},
+      {day:19,topic:"Vue Router",detail:"Rotas, parâmetros, nested, guards"},
+      {day:20,topic:"Pinia (Vuex) e Projeto",detail:"Store, state global, projeto com login e API fake"},
+      {day:21,topic:"Revisão Vue Básico",detail:"Resumo geral, checklist, refatorações"}
+    ]},
+    {title:"Semana 4: Vue.js Avançado",days:[
+      {day:22,topic:"Composition API",detail:"setup, ref, reactive, provide/inject, composables"},
+      {day:23,topic:"Consumo de API",detail:"Axios, autenticação JWT, interceptors"},
+      {day:24,topic:"Performance Vue",detail:"Lazy loading, suspense, divisão de bundles"},
+      {day:25,topic:"Testes em Vue",detail:"Vue Test Utils, mocks, cobertura de componentes"},
+      {day:26,topic:"Projeto Vue Final",detail:"Dashboard com login, API externa, deploy"},
+      {day:27,topic:"Revisão Vue Avançado",detail:"Checklist, ajustes, publicação no GitHub"},
+      {day:28,topic:"Extras / Reposição",detail:"Estudos extras: Nuxt, Vuetify, animações"}
     ]}
-  ]
-},
-
-
-  {
-      title: "MÊS 4 – Backend Python, Node.js, Banco de Dados",
-      weeks: [
-        {
-
-      title: "Semana 1: Fundamentos do Python", days: [
-        {"day": 1, "topic": "Introdução ao Python", "detail": "História, instalação, Hello World, tipos primitivos", "link": "https://www.youtube.com/watch?v=S9uPNppGsGo"},
-        {"day": 2, "topic": "Variáveis e Operadores", "detail": "Aritméticos, lógicos, relacionais, atribuição", "link": "https://www.youtube.com/watch?v=K1iXL5T_k5Y"},
-        {"day": 3, "topic": "Condicionais e Entrada de Dados", "detail": "if, elif, else, input(), tratamento básico", "link": "https://www.youtube.com/watch?v=Vb9PjS3QOb8"},
-        {"day": 4, "topic": "Laços de Repetição", "detail": "while, for, range, break, continue", "link": "https://www.youtube.com/watch?v=6iF8Xb7Z3wQ"},
-        {"day": 5, "topic": "Listas e Tuplas", "detail": "Criação, indexação, slicing, métodos de lista", "link": "https://www.youtube.com/watch?v=1jYemJvT9I0"},
-        {"day": 6, "topic": "Dicionários e Conjuntos", "detail": "dict, set, manipulação e iteração", "link": "https://www.youtube.com/watch?v=daefaLgNkw0"},
-        {"day": 7, "topic": "Funções em Python", "detail": "def, parâmetros, retorno, escopo de variáveis", "link": "https://www.youtube.com/watch?v=Qd8JT0bnJGs"}
-      ]
-    },
-    {
-      title: "Semana 2: Python Intermediário",days: [
-        {"day": 8, "topic": "Módulos e Pacotes", "detail": "import, criação de módulos, uso de bibliotecas", "link": "https://www.youtube.com/watch?v=EMfFdv1wos4"},
-        {"day": 9, "topic": "Arquivos em Python", "detail": "open, read, write, with, arquivos CSV", "link": "https://www.youtube.com/watch?v=Uh2ebFW8OYM"},
-        {"day": 10, "topic": "Exceções e Try/Except", "detail": "tratamento de erros, finally, raise", "link": "https://www.youtube.com/watch?v=NIWwJbo-9_8"},
-        {"day": 11, "topic": "List Comprehension e Lambda", "detail": "map, filter, reduce, expressão lambda", "link": "https://www.youtube.com/watch?v=1jHUY3qoBu8"},
-        {"day": 12, "topic": "Orientação a Objetos I", "detail": "classe, objeto, atributos, métodos, construtor", "link": "https://www.youtube.com/watch?v=apACNr7DC_s"},
-        {"day": 13, "topic": "Orientação a Objetos II", "detail": "herança, encapsulamento, polimorfismo", "link": "https://www.youtube.com/watch?v=Ej_02ICOIgs"},
-        {"day": 14, "topic": "Projeto Final Python", "detail": "Mini sistema com OOP, arquivos e tratamento de erros", "link": ""}
-      ]
-    },
- 
-        {
-          title: "Semana 3: Node.js e JavaScript avançado",
-          days: [
-            { day: 57, topic: "Node.js Core", detail: "Eventos, Streams", video: "https://www.youtube.com/watch?v=TlB_eWDSMt4" },
-            { day: 58, topic: "Módulos e NPM", detail: "Pacotes e dependências", video: "https://www.youtube.com/watch?v=jHDhaSSKmB0" },
-            { day: 59, topic: "Eventos e Callbacks", detail: "EventEmitter", video: "https://www.youtube.com/watch?v=jHDhaSSKmB0" },
-            { day: 60, topic: "Trabalhando com arquivos", detail: "fs module", video: "https://www.youtube.com/watch?v=U57kU311-nE" },
-            { day: 61, topic: "Debugging", detail: "Debug no Node.js", video: "https://www.youtube.com/watch?v=PG4Jyxn5Evw" },
-            { day: 62, topic: "Projeto Node.js básico", detail: "CLI simples", video: "" },
-            { day: 63, topic: "Revisão e exercícios", detail: "Revisão prática", video: "" }
-          ]
-        },
-    
-        {
-  title: "Semana 4: Banco de Dados - MongoDB e PostgreSQL",
-  days: [
-    { day: 1, topic: "Introdução MongoDB", detail: "NoSQL vs Relacional, instalação, conceitos básicos, BSON" },
-    { day: 2, topic: "Operações CRUD MongoDB", detail: "Insert, Find, Update, Delete, filtros básicos" },
-    { day: 3, topic: "Modelagem NoSQL e Indexação MongoDB", detail: "Documentos, coleções, esquemas flexíveis, índices básicos" },
-    { day: 4, topic: "Agregações MongoDB", detail: "Pipeline, stages, $match, $group, $project" },
-
-    { day: 5, topic: "Introdução PostgreSQL", detail: "SGBD relacional, instalação, psql, tipos de dados" },
-    { day: 6, topic: "SQL Básico PostgreSQL", detail: "SELECT, INSERT, UPDATE, DELETE, WHERE, operadores" },
-    { day: 7, topic: "Modelagem e Relacionamentos", detail: "Tabelas, chaves primárias e estrangeiras, normalização" },
-    { day: 8, topic: "Consultas Avançadas PostgreSQL", detail: "JOINS (INNER, LEFT, RIGHT), GROUP BY, ORDER BY, funções agregadas" }
-  ]
-}
-]
- },
-
- {
-  "title": "MÊS 5 – DevOps Básico, Docker, CI/CD e Testes",
-  "weeks": [
-    {
-      "title": "Semana 1: Fundamentos e Docker",
-      "days": [
-        { "day": 1, "topic": "Conceitos DevOps", "detail": "Cultura DevOps, integração entre times, práticas ágeis" },
-        { "day": 2, "topic": "Versionamento e Git", "detail": "Git básico, branches, commits, GitFlow" },
-        { "day": 3, "topic": "Introdução ao Docker", "detail": "Containers vs VMs, instalação, primeiros comandos" },
-        { "day": 4, "topic": "Dockerfiles e Imagens", "detail": "Criação de imagens, instruções básicas, otimização" },
-        { "day": 5, "topic": "Docker Compose", "detail": "Orquestração local de containers, redes, volumes" },
-        { "day": 6, "topic": "Prática com Docker", "detail": "Containerizando uma API Node.js, persistência de dados" },
-        { "day": 7, "topic": "Segurança e Versionamento de Imagens", "detail": "Tags, repositórios, boas práticas de segurança" }
-      ]
-    },
-    {
-      "title": "Semana 2: CI/CD e Monitoramento",
-      "days": [
-        { "day": 8, "topic": "Integração Contínua (CI)", "detail": "Conceitos, ferramentas como GitHub Actions e GitLab CI" },
-        { "day": 9, "topic": "Entrega Contínua (CD)", "detail": "Pipeline de deploy, testes automatizados e stages" },
-        { "day": 10, "topic": "Testes Automatizados", "detail": "Testes unitários com Jest, testes end-to-end com Cypress" },
-        { "day": 11, "topic": "Pipeline CI/CD na prática", "detail": "Configuração completa com GitHub Actions + Docker" },
-        { "day": 12, "topic": "Docker Registry e Deploy", "detail": "Push de imagens, DockerHub, deploy automatizado" },
-        { "day": 13, "topic": "Monitoramento com Prometheus e Grafana", "detail": "Coleta e visualização de métricas básicas" },
-        { "day": 14, "topic": "Alertas e Logs", "detail": "Dashboards, alertas, boas práticas de logging" }
-      ]
-    },
-    {
-      "title": "Semana 3: Kubernetes e Orquestração",
-      "days": [
-        { "day": 15, "topic": "Introdução ao Kubernetes", "detail": "Conceitos, arquitetura, componentes principais" },
-        { "day": 16, "topic": "Pods, Services e Deployments", "detail": "Objetos fundamentais, escalabilidade" },
-        { "day": 17, "topic": "Volumes e ConfigMaps", "detail": "Persistência de dados e injeção de configurações" },
-        { "day": 18, "topic": "Secrets e Segurança", "detail": "Armazenamento de dados sensíveis, RBAC" },
-        { "day": 19, "topic": "kubectl e Minikube", "detail": "Ambiente local, comandos principais" },
-        { "day": 20, "topic": "Deploy Kubernetes na prática", "detail": "Configuração de um cluster local e deploy de app" },
-        { "day": 21, "topic": "Revisão Kubernetes", "detail": "Resolução de problemas, análise de logs, debugging" }
-      ]
-    },
-    {
-      "title": "Semana 4: Testes, Segurança e Projeto",
-      "days": [
-        { "day": 22, "topic": "Testes de Integração e Cobertura", "detail": "Testes com Jest, Supertest, cobertura de código" },
-        { "day": 23, "topic": "Segurança em Aplicações Web", "detail": "OWASP Top 10, headers de segurança, input validation" },
-        { "day": 24, "topic": "Autenticação e Autorização", "detail": "JWT, OAuth2, controle de acesso por roles" },
-        { "day": 25, "topic": "Criptografia e Hashes", "detail": "bcrypt, SHA256, uso prático para senhas e tokens" },
-        { "day": 26, "topic": "Auditoria e Observabilidade", "detail": "Logs estruturados, traceability, métricas" },
-        { "day": 27, "topic": "Projeto DevOps Completo", "detail": "App com Docker, CI/CD, testes e monitoramento" },
-        { "day": 28, "topic": "Revisão e Preparação para Entrevistas", "detail": "Conceitos-chave, perguntas frequentes e dicas técnicas" }
-      ]
-    }
-  ]
-},
-
-
- {
-  title: "MÊS 6: APIs REST & Segurança",
-  weeks: [
-    {title: "Semana 1: Fundamentos de REST", days: [
-      {day: 141, topic: "Introdução a APIs REST", detail: "HTTP, métodos (GET, POST, PUT, DELETE), status codes", link: "https://www.youtube.com/watch?v=SLwpqD8n3d0"},
-      {day: 142, topic: "Design de Endpoints", detail: "URLs semânticas, versionamento, HATEOAS", link: "https://www.youtube.com/watch?v=Q-BpqyOT3a8"},
-      {day: 143, topic: "Spring Boot Inicial", detail: "Criar projeto com Spring Initializr", link: "https://www.youtube.com/watch?v=9SGDpanrc8U"},
-      {day: 144, topic: "CRUD com Spring REST", detail: "@RestController, @GetMapping, @PostMapping", link: "https://www.youtube.com/watch?v=IucFDX3RO9U"},
-      {day: 145, topic: "DTOs e Validação", detail: "@Valid, Bean Validation, Lombok", link: "https://www.youtube.com/watch?v=8x6dmO6Xod8"},
-      {day: 146, topic: "Projeto 1: API de Livros", detail: "CRUD com Spring + H2 Database", link: "https://www.youtube.com/watch?v=9SGDpanrc8U"},
-      {day: 147, topic: "Documentação com Swagger", detail: "OpenAPI, Swagger UI", link: "https://www.youtube.com/watch?v=8x6dmO6Xod8"}
+  ]},
+  {title:"MÊS 3 – JavaScript Intermediário, APIs REST e React Básico",weeks:[
+    {title:"Semana 1: JavaScript Avançado",days:[
+      {day:29,topic:"ES6+ Features",detail:"Destructuring, Spread, Rest"},
+      {day:30,topic:"Closures e Scope",detail:"Funções internas e variáveis"},
+      {day:31,topic:"Programação Funcional",detail:"Funções puras, imutabilidade"},
+      {day:32,topic:"Classes em JavaScript",detail:"POO no JS"},
+      {day:33,topic:"Módulos ES6",detail:"import e export"},
+      {day:34,topic:"Promises e Callbacks Revisitados",detail:"Controle de fluxo assíncrono"},
+      {day:35,topic:"Projeto JS Avançado",detail:"Mini app com async"}
     ]},
-    {title: "Semana 2: Autenticação e JWT", days: [
-      {day: 148, topic: "Autenticação vs Autorização", detail: "OAuth2, JWT, Basic Auth", link: "https://www.youtube.com/watch?v=soGRyl9ztjI"},
-      {day: 149, topic: "Spring Security Basics", detail: "Configuração inicial, UserDetailsService", link: "https://www.youtube.com/watch?v=her_7pa0vrg"},
-      {day: 150, topic: "JWT Token", detail: "Estrutura (Header, Payload, Signature)", link: "https://www.youtube.com/watch?v=7Q17ubqLfaM"},
-      {day: 151, topic: "Implementando JWT", detail: "JJWT library, filtros (JwtAuthenticationFilter)", link: "https://www.youtube.com/watch?v=KxqlJblhzfI"},
-      {day: 152, topic: "Projeto 2: Auth API", detail: "Login/Registro com JWT", link: "https://www.youtube.com/watch?v=KxqlJblhzfI"},
-      {day: 153, topic: "Testes com Postman", detail: "Requests autenticados, envio de tokens", link: "https://www.youtube.com/watch?v=f0cMGeX1Z5s"},
-      {day: 154, topic: "Refresh Tokens", detail: "Rotação de tokens, segurança adicional", link: "https://www.youtube.com/watch?v=7Q17ubqLfaM"}
+    {title:"Semana 2: API REST e Consumo com JS",days:[
+      {day:36,topic:"RESTful API Conceitos",detail:"Princípios REST"},
+      {day:37,topic:"JSON e AJAX",detail:"Formato JSON e requisições AJAX"},
+      {day:38,topic:"Fetch API Detalhado",detail:"GET, POST, PUT, DELETE"},
+      {day:39,topic:"Testando APIs com Postman",detail:"Uso básico do Postman"},
+      {day:40,topic:"Node.js Básico",detail:"Ambiente server-side JS"},
+      {day:41,topic:"Criando Servidor Simples",detail:"HTTP com Node"},
+      {day:42,topic:"Projeto API + Frontend",detail:"Consumindo backend simples"}
     ]},
-    {title: "Semana 3: Segurança Avançada", days: [
-      {day: 155, topic: "CORS e CSRF", detail: "@CrossOrigin, proteção contra ataques", link: "https://www.youtube.com/watch?v=4KHiSt0oLJ0"},
-      {day: 156, topic: "Rate Limiting", detail: "Limitar requisições (Bucket4j, Resilience4j)", link: "https://www.youtube.com/watch?v=TRyWj4Dtz8M"},
-      {day: 157, topic: "HTTPS e Certificados", detail: "SSL/TLS, Let's Encrypt", link: "https://www.youtube.com/watch?v=H6Y1a0Y_x9k"},
-      {day: 158, topic: "Projeto 3: API com Auth + CORS", detail: "Integrar JWT + CORS em um CRUD", link: "https://www.youtube.com/watch?v=4KHiSt0oLJ0"},
-      {day: 159, topic: "Logging e Monitoramento", detail: "SLF4J, Prometheus + Grafana", link: "https://www.youtube.com/watch?v=O5F5s1uYFuw"},
-      {day: 160, topic: "OWASP Top 10", detail: "SQL Injection, XSS, como prevenir", link: "https://www.youtube.com/watch?v=WcS97rZR3qM"},
-      {day: 161, topic: "Projeto 4: API Segura", detail: "Aplicar OWASP em um projeto existente", link: "https://www.youtube.com/watch?v=WcS97rZR3qM"}
+    {title:"Semana 3: React Básico",days:[
+      {day:43,topic:"Introdução ao React",detail:"Componentes, JSX"},
+      {day:44,topic:"Props e State",detail:"Gerenciamento básico de dados"},
+      {day:45,topic:"Eventos em React",detail:"Manipulação de eventos"},
+      {day:46,topic:"Componentes funcionais e hooks",detail:"useState, useEffect"},
+      {day:47,topic:"Formulários e validação",detail:"Controlled components"},
+      {day:48,topic:"Projeto React simples",detail:"To-do App React"},
+      {day:49,topic:"Revisão React",detail:"Revisão e exercícios"}
     ]},
-
-    {
-  title: "Semana 4 – Fundamentos de Cloud Computing",days: [
-        { "day": 1, "topic": "Conceitos Básicos de Cloud", "detail": "O que é Cloud, vantagens, modelos de serviço (IaaS, PaaS, SaaS)" },
-        { "day": 2, "topic": "Modelos de Implantação", "detail": "Nuvem pública, privada, híbrida e comunitária" },
-        { "day": 3, "topic": "Serviços na Nuvem", "detail": "Compute (EC2), Armazenamento (S3), Banco de Dados (RDS, DynamoDB)" },
-        { "day": 4, "topic": "AWS: Visão Geral dos Serviços", "detail": "EC2, S3, IAM, Lambda, RDS – fundamentos de cada um" },
-        { "day": 5, "topic": "Identidade e Acesso (IAM)", "detail": "Usuários, grupos, permissões e políticas de acesso" },
-        { "day": 6, "topic": "Deploy de Aplicação na Nuvem", "detail": "Subindo uma aplicação Node.js com EC2 + S3 + RDS" },
-        { "day": 7, "topic": "Custos, Segurança e Boas Práticas", "detail": "Orçamento, segurança na nuvem, práticas recomendadas de arquitetura" }
-      ]
-    }
-  ]
-},
-
-{
-  title: "MÊS 7: Cloud e Infraestrutura",
-  weeks: [
-    {title: "Semana 1: AWS Básico e Terraform", days: [
-      {day: 169, topic: "Introdução à AWS", detail: "Conta AWS, IAM, EC2, S3, RDS", link: "https://www.youtube.com/watch?v=ulprqHHWlng"},
-      {day: 170, topic: "Terraform: Conceitos de IaC", detail: "Providers, resources, state file", link: "https://www.youtube.com/watch?v=SLB_c_ayRMo"},
-      {day: 171, topic: "Criando Infra com Terraform", detail: "EC2, VPC, Security Groups", link: "https://www.youtube.com/watch?v=7xngnjfIlK4"},
-      {day: 172, topic: "Armazenamento na AWS", detail: "S3, EBS, Glacier", link: "https://www.youtube.com/watch?v=uNExpWvSuPc"},
-      {day: 173, topic: "Projeto 1: Infra como Código", detail: "Deploy de servidor web (EC2 + S3)", link: "https://www.youtube.com/watch?v=7xngnjfIlK4"},
-      {day: 174, topic: "Variáveis e Outputs no Terraform", detail: "Terraform.tfvars, módulos básicos", link: "https://www.youtube.com/watch?v=SLB_c_ayRMo"},
-      {day: 175, topic: "Monitoramento AWS (CloudWatch)", detail: "Métricas, alarms, logs", link: "https://www.youtube.com/watch?v=uNExpWvSuPc"}
-    ]},
-    {title: "Semana 2: DevOps e Automação", days: [
-      {day: 176, topic: "CI/CD com GitHub Actions", detail: "Pipelines para Terraform", link: "https://www.youtube.com/watch?v=R8_veQiYBjI"},
-      {day: 177, topic: "Docker na AWS", detail: "ECS, ECR, Fargate", link: "https://www.youtube.com/watch?v=zs3tyVgiBQQ"},
-      {day: 178, topic: "Terraform Avançado", detail: "Workspaces, remote state (S3 backend)", link: "https://www.youtube.com/watch?v=7xngnjfIlK4"},
-      {day: 179, topic: "Projeto 2: CI/CD para Infra", detail: "GitHub Actions + Terraform", link: "https://www.youtube.com/watch?v=R8_veQiYBjI"},
-      {day: 180, topic: "Serverless (AWS Lambda)", detail: "Funções sem servidor com Terraform", link: "https://www.youtube.com/watch?v=Zs8u5nGZVMI"},
-      {day: 181, topic: "Segurança AWS (IAM Policies)", detail: "Least privilege, roles", link: "https://www.youtube.com/watch?v=ulprqHHWlng"},
-      {day: 182, topic: "Projeto 3: API Serverless", detail: "Lambda + API Gateway", link: "https://www.youtube.com/watch?v=Zs8u5nGZVMI"}
-    ]},
-    {title: "Semana 3: Kubernetes e Gerenciamento", days: [
-      {day: 183, topic: "Introdução ao Kubernetes", detail: "Pods, Deployments, Services", link: "https://www.youtube.com/watch?v=s_o8dwzRlu4"},
-      {day: 184, topic: "EKS (Kubernetes na AWS)", detail: "Cluster EKS com Terraform", link: "https://www.youtube.com/watch?v=p6xDCz00TxU"},
-      {day: 185, topic: "Helm Charts", detail: "Pacotes para Kubernetes", link: "https://www.youtube.com/watch?v=Zzwq9GmYSL8"},
-      {day: 186, topic: "Projeto 4: Deploy de App no EKS", detail: "Aplicação Dockerizada + Helm", link: "https://www.youtube.com/watch?v=p6xDCz00TxU"},
-      {day: 187, topic: "Auto Scaling", detail: "Horizontal Pod Autoscaler", link: "https://www.youtube.com/watch?v=s_o8dwzRlu4"},
-      {day: 188, topic: "Observabilidade", detail: "Prometheus + Grafana no EKS", link: "https://www.youtube.com/watch?v=8XigG8aXZQU"},
-      {day: 189, topic: "Projeto 5: Monitoring Stack", detail: "Grafana dashboards para EKS", link: "https://www.youtube.com/watch?v=8XigG8aXZQU"}
-    ]},
-    {title: "Semana 4: Multi-Cloud e Projetos Finais", days: [
-      {day: 190, topic: "Azure/GCP com Terraform", detail: "Comparativo com AWS", link: "https://www.youtube.com/watch?v=SLB_c_ayRMo"},
-      {day: 191, topic: "Infra Híbrida", detail: "AWS + On-Premises (VPN, Direct Connect)", link: "https://www.youtube.com/watch?v=ulprqHHWlng"},
-      {day: 192, topic: "Projeto 6: Multi-Cloud", detail: "Deploy em AWS + Azure", link: "https://www.youtube.com/watch?v=SLB_c_ayRMo"},
-      {day: 193, topic: "Gerenciamento de Custos", detail: "AWS Cost Explorer, otimizações", link: "https://www.youtube.com/watch?v=uNExpWvSuPc"},
-      {day: 194, topic: "Projeto Final: Infra Completa", detail: "EKS + RDS + Lambda + CI/CD", link: "https://www.youtube.com/watch?v=p6xDCz00TxU"},
-      {day: 195, topic: "Desafio: Disaster Recovery", detail: "Backup/Restore com S3 e RDS", link: "https://www.youtube.com/watch?v=uNExpWvSuPc"},
-      {day: 196, topic: "Next Steps", detail: "Certificação AWS/Azure", link: "https://www.youtube.com/watch?v=ulprqHHWlng"}
+    {title:"Semana 4: Avançando React e Git",days:[
+      {day:50,topic:"React Router",detail:"Navegação SPA"},
+      {day:51,topic:"Context API",detail:"Gerenciamento global"},
+      {day:52,topic:"Hooks avançados",detail:"useReducer, useMemo"},
+      {day:53,topic:"Testes em React",detail:"React Testing Library"},
+      {day:54,topic:"Git e Fluxo de trabalho",detail:"Feature Branch"},
+      {day:55,topic:"Deploy com Vercel",detail:"Publicando app React"},
+      {day:56,topic:"Projeto Final React",detail:"SPA completa"}
     ]}
-  ]
-},
-
-  {
-      title: "MÊS 8 – Cybersegurança do Básico ao Avançado",
-      weeks: [
-        {
-          title: "Semana 1: Fundamentos de Segurança da Informação",
-          days: [
-            { day: 113, topic: "Princípios de Segurança", detail: "Confidencialidade, Integridade, Disponibilidade", video: "https://www.youtube.com/watch?v=qrYIVHJY6Co" },
-            { day: 114, topic: "Tipos de Ataques", detail: "Phishing, Malware, Ransomware", video: "https://www.youtube.com/watch?v=Yk5hLQpBwcQ" },
-            { day: 115, topic: "Modelos de Segurança", detail: "Defesa em profundidade, Zero Trust", video: "https://www.youtube.com/watch?v=qrYIVHJY6Co" },
-            { day: 116, topic: "Criptografia aplicada", detail: "Simétrica, assimétrica, certificados", video: "https://www.youtube.com/watch?v=Zf1kDTAwGmI" },
-            { day: 117, topic: "Firewalls e IDS", detail: "Proteção de redes", video: "https://www.youtube.com/watch?v=qpQZcJ2S1y0" },
-            { day: 118, topic: "Gestão de vulnerabilidades", detail: "Scanner e correções", video: "" },
-            { day: 119, topic: "Laboratório básico", detail: "Análise prática", video: "" }
-          ]
-        },
-        {
-          title: "Semana 2: Pentest e Ferramentas",
-          days: [
-            { day: 120, topic: "Introdução a Pentest", detail: "Etapas e metodologia", video: "https://www.youtube.com/watch?v=4i7OCmvEr7A" },
-            { day: 121, topic: "Nmap e Reconhecimento", detail: "Scanner de portas", video: "https://www.youtube.com/watch?v=4i7OCmvEr7A" },
-            { day: 122, topic: "Metasploit Básico", detail: "Exploração e payloads", video: "https://www.youtube.com/watch?v=4i7OCmvEr7A" },
-            { day: 123, topic: "Wireshark", detail: "Análise de pacotes", video: "https://www.youtube.com/watch?v=4i7OCmvEr7A" },
-            { day: 124, topic: "Burp Suite", detail: "Proxy e testes", video: "https://www.youtube.com/watch?v=4i7OCmvEr7A" },
-            { day: 125, topic: "Exercícios práticos", detail: "Laboratório pentest", video: "" },
-            { day: 126, topic: "Relatório de Pentest", detail: "Documentação", video: "" }
-          ]
-        },
-        {
-          title: "Semana 3: Segurança em Aplicações Web",
-          days: [
-            { day: 127, topic: "OWASP Top 10 Detalhado", detail: "Ameaças e prevenção", video: "https://www.youtube.com/watch?v=ggLEi4rUYqE" },
-            { day: 128, topic: "Autenticação segura", detail: "MFA, OAuth2", video: "https://www.youtube.com/watch?v=7nafaH9SddU" },
-            { day: 129, topic: "Proteção contra XSS e CSRF", detail: "Técnicas e exemplos", video: "https://www.youtube.com/watch?v=ggLEi4rUYqE" },
-            { day: 130, topic: "Configuração segura de servidores", detail: "SSL/TLS", video: "https://www.youtube.com/watch?v=qrYIVHJY6Co" },
-            { day: 131, topic: "Gerenciamento de sessões", detail: "Cookies seguros", video: "" },
-            { day: 132, topic: "Testes de segurança", detail: "Ferramentas de escaneamento", video: "" },
-            { day: 133, topic: "Projeto Web Seguro", detail: "Aplicação protegida", video: "" }
-          ]
-        },
-        {
-          title: "Semana 4: Segurança em Redes e Infraestrutura",
-          days: [
-            { day: 134, topic: "Conceitos de Redes", detail: "TCP/IP, protocolos", video: "https://www.youtube.com/watch?v=qiQR5rTSshw" },
-            { day: 135, topic: "VPNs e Firewalls", detail: "Configuração e uso", video: "https://www.youtube.com/watch?v=qpQZcJ2S1y0" },
-            { day: 136, topic: "Segurança Wireless", detail: "WPA2, WPA3", video: "https://www.youtube.com/watch?v=qiQR5rTSshw" },
-            { day: 137, topic: "Monitoramento de rede", detail: "Snort e Suricata", video: "https://www.youtube.com/watch?v=qiQR5rTSshw" },
-            { day: 138, topic: "Resposta a incidentes", detail: "Planos e ações", video: "" },
-            { day: 139, topic: "Simulado de incidentes", detail: "Prática em laboratório", video: "" },
-            { day: 140, topic: "Revisão Cybersegurança", detail: "Resumo e prática", video: "" }
-          ]
-        }
-      ]
-    },
-
-  {
-    title: "MÊS 9: Certificações & Cyber Fundamentos",
-    weeks: [
-      {
-        title: "Semana 29: Certificações & Revisão",
-        days: [
-          { day: 198, topic: "Profissional de Nuvem AWS", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 199, topic: "Exemplo Prova AWS", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 200, topic: "Certificado Docker Básico", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 201, topic: "Kubernetes CKAD", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 202, topic: "Simulado Cronometrado", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 203, topic: "Revisão e Dúvidas", detail: "", link: "" },
-          { day: 204, topic: "Agendar Certificação", detail: "", link: "" }
-        ]
-      },
-      {
-        title: "Semana 30: LinkedIn, GitHub e Networking",
-        days: [
-          { day: 205, topic: "Otimizar Perfil LinkedIn", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 206, topic: "Posts Técnicos & Artigos", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 207, topic: "Leia-me no GitHub", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 208, topic: "Contribuições Open Source", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 209, topic: "Networking: Mentores", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 210, topic: "Publicar Portfólio", detail: "", link: "" },
-          { day: 211, topic: "Avaliar Mentoria", detail: "", link: "" }
-        ]
-      }
-    ]
-  },
-  {
-    title: "MÊS 10: Técnicas de Entrevistas & Preparação Final",
-    weeks: [
-      {
-        title: "Semana 31: Entrevistas Técnicas",
-        days: [
-          { day: 212, topic: "Algoritmos LeetCode Fácil", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 213, topic: "Estruturas: Matrizes e Listas", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 214, topic: "Design de Sistema BÁSICO", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 215, topic: "Entrevista STAR", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 216, topic: "Entrevista Simulada", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 217, topic: "Revisão de Feedback", detail: "", link: "" },
-          { day: 218, topic: "Habilidades de Comunicação", detail: "", link: "" }
-        ]
-      },
-      {
-        title: "Semana 32: Transição & Conquista",
-        days: [
-          { day: 219, topic: "Ajustar CV Técnico", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 220, topic: "Carta de Apresentação", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 221, topic: "Inscrever em Plataformas (VanHack etc)", detail: "", link: "https://www.youtube.com/watch?v=..." },
-          { day: 222, topic: "Processos Seletivos", detail: "", link: "" },
-          { day: 223, topic: "Conexões com Recrutadores", detail: "", link: "" },
-          { day: 224, topic: "Analisar Ofertas", detail: "", link: "" },
-          { day: 225, topic: "Conquista! 🎉", detail: "", link: "" }
-        ]
-      }
-    ]
-  },
-
-  {
-  title: "MÊS 11: Projeto Final Fullstack",
-  weeks: [
-    {title: "Semana 1: Escolha da Stack e MVP", days: [
-      {day: 197, topic: "Planejamento Fullstack", detail: "Definir MVP (ex: rede social, e-commerce, SaaS)", link: "https://exemplo.com/img/mvp-plan.jpg"},
-      {day: 198, topic: "Stack Tecnológica", detail: "Ex: React + Node + PostgreSQL ou Next.js + Firebase", link: "https://exemplo.com/img/tech-stack.jpg"},
-      {day: 199, topic: "Design do Projeto (Figma)", detail: "Wireframes e protótipo UI/UX", link: "https://exemplo.com/img/figma-design.jpg"},
-      {day: 200, topic: "Projeto 1: Clone do Twitter", detail: "Feed, posts, autenticação (exemplo real: https://exemplo.com/img/twitter-clone.jpg)", link: "https://www.youtube.com/watch?v=CGpN1J_NtXI"},
-      {day: 201, topic: "Deploy Inicial", detail: "Hospedar frontend (Vercel) e backend (Railway)", link: "https://exemplo.com/img/deploy.jpg"},
-      {day: 202, topic: "API Documentada", detail: "Swagger/Postman (exemplo: https://exemplo.com/img/swagger-docs.jpg)", link: "https://www.youtube.com/watch?v=8x6dmO6Xod8"},
-      {day: 203, topic: "Apresentação do MVP", detail: "Pitch em 2 minutos (gravar vídeo)", link: ""}
+  ]},
+  {title:"MÊS 4 – Backend Python, Node.js, Banco de Dados",weeks:[
+    {title:"Semana 1: Fundamentos do Python",days:[
+      {day:1,topic:"Introdução ao Python",detail:"História, instalação, Hello World, tipos primitivos"},
+      {day:2,topic:"Variáveis e Operadores",detail:"Aritméticos, lógicos, relacionais, atribuição"},
+      {day:3,topic:"Condicionais e Entrada de Dados",detail:"if, elif, else, input(), tratamento básico"},
+      {day:4,topic:"Laços de Repetição",detail:"while, for, range, break, continue"},
+      {day:5,topic:"Listas e Tuplas",detail:"Criação, indexação, slicing, métodos de lista"},
+      {day:6,topic:"Dicionários e Conjuntos",detail:"dict, set, manipulação e iteração"},
+      {day:7,topic:"Funções em Python",detail:"def, parâmetros, retorno, escopo de variáveis"}
     ]},
-    {title: "Semana 2: Projeto Destaque (E-commerce)", days: [
-      {day: 204, topic: "Loja Virtual Completa", detail: "Carrinho, checkout, pagamentos (Stripe) - Exemplo: https://exemplo.com/img/ecommerce-demo.jpg", link: "https://www.youtube.com/watch?v=377AQ0y6LPA"},
-      {day: 205, topic: "Microserviços", detail: "Serviço separado para pedidos (ex: AWS Lambda)", link: "https://exemplo.com/img/microservices.jpg"},
-      {day: 206, topic: "SEO Avançado", detail: "Next.js SSR, meta tags (exemplo: https://exemplo.com/img/seo.jpg)", link: "https://www.youtube.com/watch?v=zNGIM0u1GWw"},
-      {day: 207, topic: "Dashboard Admin", detail: "CRUD de produtos (exemplo: https://exemplo.com/img/admin-panel.jpg)", link: "https://www.youtube.com/watch?v=vpvtZZi5ZWk"},
-      {day: 208, topic: "Testes Automatizados", detail: "Jest (front) + Postman (back)", link: "https://exemplo.com/img/tests.jpg"},
-      {day: 209, topic: "Performance", detail: "Lighthouse otimizado (exemplo: https://exemplo.com/img/lighthouse.jpg)", link: "https://www.youtube.com/watch?v=zNGIM0u1GWw"},
-      {day: 210, topic: "Deploy Final", detail: "Domínio customizado (ex: .dev)", link: ""}
+    {title:"Semana 2: Python Intermediário",days:[
+      {day:8,topic:"Módulos e Pacotes",detail:"import, criação de módulos, uso de bibliotecas"},
+      {day:9,topic:"Arquivos em Python",detail:"open, read, write, with, arquivos CSV"},
+      {day:10,topic:"Exceções e Try/Except",detail:"tratamento de erros, finally, raise"},
+      {day:11,topic:"List Comprehension e Lambda",detail:"map, filter, reduce, expressão lambda"},
+      {day:12,topic:"Orientação a Objetos I",detail:"classe, objeto, atributos, métodos, construtor"},
+      {day:13,topic:"Orientação a Objetos II",detail:"herança, encapsulamento, polimorfismo"},
+      {day:14,topic:"Projeto Final Python",detail:"Mini sistema com OOP, arquivos e tratamento de erros"}
     ]},
-    {title: "Semana 3: Projeto Complexo (SaaS)", days: [
-      {day: 211, topic: "SaaS com Assinaturas", detail: "Ex: ferramenta de analytics (exemplo: https://exemplo.com/img/saas-demo.jpg)", link: "https://www.youtube.com/watch?v=u8bsD5F5gD4"},
-      {day: 212, topic: "Autenticação Multi-nível", detail: "Roles (admin, user, guest)", link: "https://exemplo.com/img/auth-roles.jpg"},
-      {day: 213, topic: "WebSockets", detail: "Chat em tempo real (exemplo: https://exemplo.com/img/websocket-chat.jpg)", link: "https://www.youtube.com/watch?v=ZKEqqIO7n-k"},
-      {day: 214, topic: "Banco de Dados Avançado", detail: "MongoDB Atlas ou Firebase", link: "https://exemplo.com/img/database.jpg"},
-      {day: 215, topic: "CI/CD Profissional", detail: "GitHub Actions + Docker (exemplo: https://exemplo.com/img/cicd.jpg)", link: "https://www.youtube.com/watch?v=R8_veQiYBjI"},
-      {day: 216, topic: "Monitoramento", detail: "Sentry + New Relic", link: "https://exemplo.com/img/monitoring.jpg"},
-      {day: 217, topic: "Readme Profissional", detail: "Badges, GIFs do projeto (exemplo: https://exemplo.com/img/readme.jpg)", link: ""}
+    {title:"Semana 3: Node.js e JavaScript avançado",days:[
+      {day:57,topic:"Node.js Core",detail:"Eventos, Streams"},
+      {day:58,topic:"Módulos e NPM",detail:"Pacotes e dependências"},
+      {day:59,topic:"Eventos e Callbacks",detail:"EventEmitter"},
+      {day:60,topic:"Trabalhando com arquivos",detail:"fs module"},
+      {day:61,topic:"Debugging",detail:"Debug no Node.js"},
+      {day:62,topic:"Projeto Node.js básico",detail:"CLI simples"},
+      {day:63,topic:"Revisão e exercícios",detail:"Revisão prática"}
     ]},
-    {title: "Semana 4: Diferenciação no Portfólio", days: [
-      {day: 218, topic: "Projeto Open Source", detail: "Publicar no GitHub (ex: lib de componentes) - Exemplo: https://exemplo.com/img/open-source.jpg", link: "https://www.youtube.com/watch?v=cuoNzXFLitc"},
-      {day: 219, topic: "Vídeo Demo", detail: "Gravar demonstração (exemplo: https://exemplo.com/img/video-demo.jpg)", link: "https://www.youtube.com/watch?v=ZKEqqIO7n-k"},
-      {day: 220, topic: "Artigos Técnicos", detail: "Escrever sobre desafios (ex: Medium)", link: "https://exemplo.com/img/tech-article.jpg"},
-      {day: 221, topic: "Deploy Multi-cloud", detail: "AWS + Vercel + Firebase", link: "https://exemplo.com/img/multi-cloud.jpg"},
-      {day: 222, topic: "LinkedIn Atualizado", detail: "Postar projetos (exemplo: https://exemplo.com/img/linkedin-post.jpg)", link: ""},
-      {day: 223, topic: "Case de Sucesso", detail: "Métricas reais (ex: 1000 usuários)", link: "https://exemplo.com/img/case-study.jpg"},
-      {day: 224, topic: "Next Steps", detail: "Contribuir para projetos grandes (ex: React)", link: "https://exemplo.com/img/opensource-contrib.jpg"}
+    {title:"Semana 4: Banco de Dados - MongoDB e PostgreSQL",days:[
+      {day:64,topic:"Introdução MongoDB",detail:"NoSQL vs Relacional, instalação, conceitos básicos, BSON"},
+      {day:65,topic:"Operações CRUD MongoDB",detail:"Insert, Find, Update, Delete, filtros básicos"},
+      {day:66,topic:"Modelagem NoSQL e Indexação MongoDB",detail:"Documentos, coleções, esquemas flexíveis, índices básicos"},
+      {day:67,topic:"Agregações MongoDB",detail:"Pipeline, stages, $match, $group, $project"},
+      {day:68,topic:"Introdução PostgreSQL",detail:"SGBD relacional, instalação, psql, tipos de dados"},
+      {day:69,topic:"SQL Básico PostgreSQL",detail:"SELECT, INSERT, UPDATE, DELETE, WHERE, operadores"},
+      {day:70,topic:"Modelagem e Relacionamentos",detail:"Tabelas, chaves primárias e estrangeiras, normalização"}
     ]}
-  ]
-}
-
-
-
+  ]},
+  {title:"MÊS 5 – DevOps Básico, Docker, CI/CD e Testes",weeks:[
+    {title:"Semana 1: Fundamentos e Docker",days:[
+      {day:71,topic:"Conceitos DevOps",detail:"Cultura DevOps, integração entre times, práticas ágeis"},
+      {day:72,topic:"Versionamento e Git",detail:"Git básico, branches, commits, GitFlow"},
+      {day:73,topic:"Introdução ao Docker",detail:"Containers vs VMs, instalação, primeiros comandos"},
+      {day:74,topic:"Dockerfiles e Imagens",detail:"Criação de imagens, instruções básicas, otimização"},
+      {day:75,topic:"Docker Compose",detail:"Orquestração local de containers, redes, volumes"},
+      {day:76,topic:"Prática com Docker",detail:"Containerizando uma API Node.js, persistência de dados"},
+      {day:77,topic:"Segurança e Versionamento de Imagens",detail:"Tags, repositórios, boas práticas de segurança"}
+    ]},
+    {title:"Semana 2: CI/CD e Monitoramento",days:[
+      {day:78,topic:"Integração Contínua (CI)",detail:"Conceitos, ferramentas como GitHub Actions e GitLab CI"},
+      {day:79,topic:"Entrega Contínua (CD)",detail:"Pipeline de deploy, testes automatizados e stages"},
+      {day:80,topic:"Testes Automatizados",detail:"Testes unitários com Jest, testes end-to-end com Cypress"},
+      {day:81,topic:"Pipeline CI/CD na prática",detail:"Configuração completa com GitHub Actions + Docker"},
+      {day:82,topic:"Docker Registry e Deploy",detail:"Push de imagens, DockerHub, deploy automatizado"},
+      {day:83,topic:"Monitoramento com Prometheus e Grafana",detail:"Coleta e visualização de métricas básicas"},
+      {day:84,topic:"Alertas e Logs",detail:"Dashboards, alertas, boas práticas de logging"}
+    ]},
+    {title:"Semana 3: Kubernetes e Orquestração",days:[
+      {day:85,topic:"Introdução ao Kubernetes",detail:"Conceitos, arquitetura, componentes principais"},
+      {day:86,topic:"Pods, Services e Deployments",detail:"Objetos fundamentais, escalabilidade"},
+      {day:87,topic:"Volumes e ConfigMaps",detail:"Persistência de dados e injeção de configurações"},
+      {day:88,topic:"Secrets e Segurança",detail:"Armazenamento de dados sensíveis, RBAC"},
+      {day:89,topic:"kubectl e Minikube",detail:"Ambiente local, comandos principais"},
+      {day:90,topic:"Deploy Kubernetes na prática",detail:"Configuração de um cluster local e deploy de app"},
+      {day:91,topic:"Revisão Kubernetes",detail:"Resolução de problemas, análise de logs, debugging"}
+    ]},
+    {title:"Semana 4: Testes, Segurança e Projeto",days:[
+      {day:92,topic:"Testes de Integração e Cobertura",detail:"Testes com Jest, Supertest, cobertura de código"},
+      {day:93,topic:"Segurança em Aplicações Web",detail:"OWASP Top 10, headers de segurança, input validation"},
+      {day:94,topic:"Autenticação e Autorização",detail:"JWT, OAuth2, controle de acesso por roles"},
+      {day:95,topic:"Criptografia e Hashes",detail:"bcrypt, SHA256, uso prático para senhas e tokens"},
+      {day:96,topic:"Auditoria e Observabilidade",detail:"Logs estruturados, traceability, métricas"},
+      {day:97,topic:"Projeto DevOps Completo",detail:"App com Docker, CI/CD, testes e monitoramento"},
+      {day:98,topic:"Revisão e Preparação para Entrevistas",detail:"Conceitos-chave, perguntas frequentes e dicas técnicas"}
+    ]}
+  ]},
+  {title:"MÊS 6: APIs REST & Segurança",weeks:[
+    {title:"Semana 1: Fundamentos de REST",days:[
+      {day:99,topic:"Introdução a APIs REST",detail:"HTTP, métodos (GET, POST, PUT, DELETE), status codes"},
+      {day:100,topic:"Design de Endpoints",detail:"URLs semânticas, versionamento, HATEOAS"},
+      {day:101,topic:"Spring Boot Inicial",detail:"Criar projeto com Spring Initializr"},
+      {day:102,topic:"CRUD com Spring REST",detail:"@RestController, @GetMapping, @PostMapping"},
+      {day:103,topic:"DTOs e Validação",detail:"@Valid, Bean Validation, Lombok"},
+      {day:104,topic:"Projeto 1: API de Livros",detail:"CRUD com Spring + H2 Database"},
+      {day:105,topic:"Documentação com Swagger",detail:"OpenAPI, Swagger UI"}
+    ]},
+    {title:"Semana 2: Autenticação e JWT",days:[
+      {day:106,topic:"Autenticação vs Autorização",detail:"OAuth2, JWT, Basic Auth"},
+      {day:107,topic:"Spring Security Basics",detail:"Configuração inicial, UserDetailsService"},
+      {day:108,topic:"JWT Token",detail:"Estrutura (Header, Payload, Signature)"},
+      {day:109,topic:"Implementando JWT",detail:"JJWT library, filtros (JwtAuthenticationFilter)"},
+      {day:110,topic:"Projeto 2: Auth API",detail:"Login/Registro com JWT"},
+      {day:111,topic:"Testes com Postman",detail:"Requests autenticados, envio de tokens"},
+      {day:112,topic:"Refresh Tokens",detail:"Rotação de tokens, segurança adicional"}
+    ]},
+    {title:"Semana 3: Segurança Avançada",days:[
+      {day:113,topic:"CORS e CSRF",detail:"@CrossOrigin, proteção contra ataques"},
+      {day:114,topic:"Rate Limiting",detail:"Limitar requisições (Bucket4j, Resilience4j)"},
+      {day:115,topic:"HTTPS e Certificados",detail:"SSL/TLS, Let's Encrypt"},
+      {day:116,topic:"Projeto 3: API com Auth + CORS",detail:"Integrar JWT + CORS em um CRUD"},
+      {day:117,topic:"Logging e Monitoramento",detail:"SLF4J, Prometheus + Grafana"},
+      {day:118,topic:"OWASP Top 10",detail:"SQL Injection, XSS, como prevenir"},
+      {day:119,topic:"Projeto 4: API Segura",detail:"Aplicar OWASP em um projeto existente"}
+    ]},
+    {title:"Semana 4 – Fundamentos de Cloud Computing",days:[
+      {day:120,topic:"Conceitos Básicos de Cloud",detail:"O que é Cloud, vantagens, modelos de serviço (IaaS, PaaS, SaaS)"},
+      {day:121,topic:"Modelos de Implantação",detail:"Nuvem pública, privada, híbrida e comunitária"},
+      {day:122,topic:"Serviços na Nuvem",detail:"Compute (EC2), Armazenamento (S3), Banco de Dados (RDS, DynamoDB)"},
+      {day:123,topic:"AWS: Visão Geral dos Serviços",detail:"EC2, S3, IAM, Lambda, RDS – fundamentos de cada um"},
+      {day:124,topic:"Identidade e Acesso (IAM)",detail:"Usuários, grupos, permissões e políticas de acesso"},
+      {day:125,topic:"Deploy de Aplicação na Nuvem",detail:"Subindo uma aplicação Node.js com EC2 + S3 + RDS"},
+      {day:126,topic:"Custos, Segurança e Boas Práticas",detail:"Orçamento, segurança na nuvem, práticas recomendadas de arquitetura"}
+    ]}
+  ]},
+  {title:"MÊS 7: Cloud e Infraestrutura",weeks:[
+    {title:"Semana 1: AWS Básico e Terraform",days:[
+      {day:127,topic:"Introdução à AWS",detail:"Conta AWS, IAM, EC2, S3, RDS"},
+      {day:128,topic:"Terraform: Conceitos de IaC",detail:"Providers, resources, state file"},
+      {day:129,topic:"Criando Infra com Terraform",detail:"EC2, VPC, Security Groups"},
+      {day:130,topic:"Armazenamento na AWS",detail:"S3, EBS, Glacier"},
+      {day:131,topic:"Projeto 1: Infra como Código",detail:"Deploy de servidor web (EC2 + S3)"},
+      {day:132,topic:"Variáveis e Outputs no Terraform",detail:"Terraform.tfvars, módulos básicos"},
+      {day:133,topic:"Monitoramento AWS (CloudWatch)",detail:"Métricas, alarms, logs"}
+    ]},
+    {title:"Semana 2: DevOps e Automação",days:[
+      {day:134,topic:"CI/CD com GitHub Actions",detail:"Pipelines para Terraform"},
+      {day:135,topic:"Docker na AWS",detail:"ECS, ECR, Fargate"},
+      {day:136,topic:"Terraform Avançado",detail:"Workspaces, remote state (S3 backend)"},
+      {day:137,topic:"Projeto 2: CI/CD para Infra",detail:"GitHub Actions + Terraform"},
+      {day:138,topic:"Serverless (AWS Lambda)",detail:"Funções sem servidor com Terraform"},
+      {day:139,topic:"Segurança AWS (IAM Policies)",detail:"Least privilege, roles"},
+      {day:140,topic:"Projeto 3: API Serverless",detail:"Lambda + API Gateway"}
+    ]},
+    {title:"Semana 3: Kubernetes e Gerenciamento",days:[
+      {day:141,topic:"Introdução ao Kubernetes",detail:"Pods, Deployments, Services"},
+      {day:142,topic:"EKS (Kubernetes na AWS)",detail:"Cluster EKS com Terraform"},
+      {day:143,topic:"Helm Charts",detail:"Pacotes para Kubernetes"},
+      {day:144,topic:"Projeto 4: Deploy de App no EKS",detail:"Aplicação Dockerizada + Helm"},
+      {day:145,topic:"Auto Scaling",detail:"Horizontal Pod Autoscaler"},
+      {day:146,topic:"Observabilidade",detail:"Prometheus + Grafana no EKS"},
+      {day:147,topic:"Projeto 5: Monitoring Stack",detail:"Grafana dashboards para EKS"}
+    ]},
+    {title:"Semana 4: Multi-Cloud e Projetos Finais",days:[
+      {day:148,topic:"Azure/GCP com Terraform",detail:"Comparativo com AWS"},
+      {day:149,topic:"Infra Híbrida",detail:"AWS + On-Premises (VPN, Direct Connect)"},
+      {day:150,topic:"Projeto 6: Multi-Cloud",detail:"Deploy em AWS + Azure"},
+      {day:151,topic:"Gerenciamento de Custos",detail:"AWS Cost Explorer, otimizações"},
+      {day:152,topic:"Projeto Final: Infra Completa",detail:"EKS + RDS + Lambda + CI/CD"},
+      {day:153,topic:"Desafio: Disaster Recovery",detail:"Backup/Restore com S3 e RDS"},
+      {day:154,topic:"Next Steps",detail:"Certificação AWS/Azure"}
+    ]}
+  ]},
+  {title:"MÊS 8 – Cybersegurança do Básico ao Avançado",weeks:[
+    {title:"Semana 1: Fundamentos de Segurança da Informação",days:[
+      {day:155,topic:"Princípios de Segurança",detail:"Confidencialidade, Integridade, Disponibilidade"},
+      {day:156,topic:"Tipos de Ataques",detail:"Phishing, Malware, Ransomware"},
+      {day:157,topic:"Modelos de Segurança",detail:"Defesa em profundidade, Zero Trust"},
+      {day:158,topic:"Criptografia aplicada",detail:"Simétrica, assimétrica, certificados"},
+      {day:159,topic:"Firewalls e IDS",detail:"Proteção de redes"},
+      {day:160,topic:"Gestão de vulnerabilidades",detail:"Scanner e correções"},
+      {day:161,topic:"Laboratório básico",detail:"Análise prática"}
+    ]},
+    {title:"Semana 2: Pentest e Ferramentas",days:[
+      {day:162,topic:"Introdução a Pentest",detail:"Etapas e metodologia"},
+      {day:163,topic:"Nmap e Reconhecimento",detail:"Scanner de portas"},
+      {day:164,topic:"Metasploit Básico",detail:"Exploração e payloads"},
+      {day:165,topic:"Wireshark",detail:"Análise de pacotes"},
+      {day:166,topic:"Burp Suite",detail:"Proxy e testes"},
+      {day:167,topic:"Exercícios práticos",detail:"Laboratório pentest"},
+      {day:168,topic:"Relatório de Pentest",detail:"Documentação"}
+    ]},
+    {title:"Semana 3: Segurança em Aplicações Web",days:[
+      {day:169,topic:"OWASP Top 10 Detalhado",detail:"Ameaças e prevenção"},
+      {day:170,topic:"Autenticação segura",detail:"MFA, OAuth2"},
+      {day:171,topic:"Proteção contra XSS e CSRF",detail:"Técnicas e exemplos"},
+      {day:172,topic:"Configuração segura de servidores",detail:"SSL/TLS"},
+      {day:173,topic:"Gerenciamento de sessões",detail:"Cookies seguros"},
+      {day:174,topic:"Testes de segurança",detail:"Ferramentas de escaneamento"},
+      {day:175,topic:"Projeto Web Seguro",detail:"Aplicação protegida"}
+    ]},
+    {title:"Semana 4: Segurança em Redes e Infraestrutura",days:[
+      {day:176,topic:"Conceitos de Redes",detail:"TCP/IP, protocolos"},
+      {day:177,topic:"VPNs e Firewalls",detail:"Configuração e uso"},
+      {day:178,topic:"Segurança Wireless",detail:"WPA2, WPA3"},
+      {day:179,topic:"Monitoramento de rede",detail:"Snort e Suricata"},
+      {day:180,topic:"Resposta a incidentes",detail:"Planos e ações"},
+      {day:181,topic:"Simulado de incidentes",detail:"Prática em laboratório"},
+      {day:182,topic:"Revisão Cybersegurança",detail:"Resumo e prática"}
+    ]}
+  ]},
+  {title:"MÊS 9: Certificações & Cyber Fundamentos",weeks:[
+    {title:"Semana 1: Certificações & Revisão",days:[
+      {day:183,topic:"Profissional de Nuvem AWS",detail:"Preparação para exame"},
+      {day:184,topic:"Exemplo Prova AWS",detail:"Questões práticas"},
+      {day:185,topic:"Certificado Docker Básico",detail:"Preparação para exame"},
+      {day:186,topic:"Kubernetes CKAD",detail:"Preparação para exame"},
+      {day:187,topic:"Simulado Cronometrado",detail:"Teste prático"},
+      {day:188,topic:"Revisão e Dúvidas",detail:"Tópicos mais importantes"},
+      {day:189,topic:"Agendar Certificação",detail:"Escolha de data e local"}
+    ]},
+    {title:"Semana 2: LinkedIn, GitHub e Networking",days:[
+      {day:190,topic:"Otimizar Perfil LinkedIn",detail:"Destaque suas habilidades"},
+      {day:191,topic:"Posts Técnicos & Artigos",detail:"Compartilhe conhecimento"},
+      {day:192,topic:"Leia-me no GitHub",detail:"Documentação profissional"},
+      {day:193,topic:"Contribuições Open Source",detail:"Como começar"},
+      {day:194,topic:"Networking: Mentores",detail:"Como conectar com profissionais"},
+      {day:195,topic:"Publicar Portfólio",detail:"Apresentação de projetos"},
+      {day:196,topic:"Avaliar Mentoria",detail:"Feedback e melhorias"}
+    ]}
+  ]},
+  {title:"MÊS 10: Técnicas de Entrevistas & Preparação Final",weeks:[
+    {title:"Semana 1: Entrevistas Técnicas",days:[
+      {day:197,topic:"Algoritmos LeetCode Fácil",detail:"Resolução de problemas"},
+      {day:198,topic:"Estruturas: Matrizes e Listas",detail:"Manipulação básica"},
+      {day:199,topic:"Design de Sistema BÁSICO",detail:"Arquitetura simples"},
+      {day:200,topic:"Entrevista STAR",detail:"Metodologia de respostas"},
+      {day:201,topic:"Entrevista Simulada",detail:"Prática com cenários"},
+      {day:202,topic:"Revisão de Feedback",detail:"Pontos de melhoria"},
+      {day:203,topic:"Habilidades de Comunicação",detail:"Como se expressar"}
+    ]},
+    {title:"Semana 2: Transição & Conquista",days:[
+      {day:204,topic:"Ajustar CV Técnico",detail:"Destaque projetos relevantes"},
+      {day:205,topic:"Carta de Apresentação",detail:"Personalização para vagas"},
+      {day:206,topic:"Inscrever em Plataformas",detail:"VanHack, LinkedIn Jobs"},
+      {day:207,topic:"Processos Seletivos",detail:"Como acompanhar"},
+      {day:208,topic:"Conexões com Recrutadores",detail:"Networking estratégico"},
+      {day:209,topic:"Analisar Ofertas",detail:"Comparativo salarial"},
+      {day:210,topic:"Conquista! 🎉",detail:"Celebre sua jornada"}
+    ]}
+  ]}
 ];
 
 const aiTips = {
-  "Java Básico":"Maratona Java ensina sintaxe, OO e melhores práticas em português.",
-  "React Básico":"Componentes + estado são a base da criação de interfaces modernas.",
-  "Node.js Básico":"Node permite usar JavaScript no backend, criando APIs e servidores.",
-  "Docker Básico":"Containers isolam sua aplicação e permitem deploy confiável.",
-  "HTML Básico":"HTML estrutura o conteúdo da sua página de forma semântica."
-
-
+  "HTML Básico":"Comece estruturando seu documento com as tags básicas: html, head e body.",
+  "CSS Básico":"Use seletores de classe para estilizar elementos que se repetem e IDs para elementos únicos.",
+  "JavaScript Básico":"Domine os conceitos de variáveis, funções e estruturas de controle antes de avançar.",
+  "React Básico":"Componentes são o coração do React - pense em cada parte da UI como um componente independente.",
+  "Node.js Básico":"Node permite JavaScript no backend - comece criando um servidor HTTP simples.",
+  "Docker Básico":"Containers isolam sua aplicação e suas dependências - pratique com imagens oficiais.",
+  "Git Básico":"Commits atômicos e mensagens descritivas facilitam o trabalho em equipe.",
+  "Linux Básico":"Domine os comandos essenciais: ls, cd, mkdir, rm, grep e pipes (|).",
+  "Python Básico":"A indentação é parte da sintaxe - use 4 espaços por nível.",
+  "Java Básico":"Aprenda os conceitos de POO: classes, objetos, herança e polimorfismo.",
+  "APIs REST":"Siga as convenções REST: use substantivos para endpoints e verbos HTTP corretos.",
+  "Segurança Web":"Sempre valide e sanitize inputs do usuário para prevenir injeções.",
+  "AWS Básico":"Comece com EC2 para computação, S3 para armazenamento e RDS para bancos de dados.",
+  "Kubernetes":"Pods são a menor unidade no Kubernetes - eles contêm um ou mais containers.",
+  "Terraform":"Infraestrutura como código permite versionamento e reprodução de ambientes."
 };
 
-function saveProgress(k,v){const s=JSON.parse(localStorage.getItem('sp')||'{}');s[k]=s[k]||{};s[k].done=v;localStorage.setItem('sp',JSON.stringify(s));updateProgress();}
-function saveLink(k,v){const s=JSON.parse(localStorage.getItem('sp')||'{}');s[k]=s[k]||{};s[k].link=v;localStorage.setItem('sp',JSON.stringify(s));}
-function createDayCard(d){
-  const k=`day-${d.day}`,s=JSON.parse(localStorage.getItem('sp')||'{}');
-  const card=document.createElement('div');card.className='day-card';
-  const h=document.createElement('div');h.className='day-header';h.textContent=`Dia ${d.day} - ${d.topic}`;
-  const ico=document.createElement('span');ico.className='toggle-icon';ico.textContent='▶';h.appendChild(ico);card.appendChild(h);
-  const c=document.createElement('div');c.className='day-content';
-  c.innerHTML=`<div>${d.detail}</div>`;
-  const aL=s[k]?.link||d.link;
-  if(aL){const a=document.createElement('a');a.href=aL;a.target='_blank';a.className='lesson-link-tag';a.textContent='▶ Assistir aula';c.appendChild(a);}
-  const lbl=document.createElement('label');const ch=document.createElement('input');ch.type='checkbox';ch.checked=s[k]?.done||false;ch.onchange=e=>saveProgress(k,e.target.checked);lbl.appendChild(ch);lbl.appendChild(document.createTextNode('Concluído'));c.appendChild(lbl);
-  const inp=document.createElement('input');inp.type='url';inp.placeholder='Colar link da aula';inp.className='lesson-link';inp.value=s[k]?.link||d.link||'';inp.oninput=e=>saveLink(k,e.target.value);c.appendChild(inp);
-  const tip=document.createElement('div');tip.className='ai-tip';tip.textContent=aiTips[d.topic]||'Mantenha o foco e pratique!';c.appendChild(tip);
-  card.appendChild(c);
-  h.onclick=()=>{
-    const open=c.classList.toggle('open');ico.classList.toggle('open',open);localStorage.setItem('lastDay',k);
-  };
-  if(localStorage.getItem('lastDay')===k){c.classList.add('open');ico.classList.add('open');}
-  return card;
-}
-function updateProgress(){
-  const s=JSON.parse(localStorage.getItem('sp')||'{}');let tot=0,done=0;
-  plan.forEach(m=>m.weeks.forEach(w=>w.days.forEach(d=>{tot++;if(s[`day-${d.day}`]?.done)done++;})));
-  const perc=tot?((done/tot)*100).toFixed(1):0;
-  document.getElementById('overall-progress').textContent=`Progresso: ${done}/${tot} — ${perc}% concluído`;
-}
-function renderMonth(i){
-  localStorage.setItem('lastMonth',i);
-  document.querySelectorAll('#months-ul li').forEach((li,idx)=>li.classList.toggle('active',idx===i));
-  const cnt=document.getElementById('content');cnt.innerHTML=`<div id="overall-progress"></div><h2>${plan[i].title}</h2>`;
-  plan[i].weeks.forEach(w=>{
-    const wd=document.createElement('div');wd.className='week';
-    const wh=document.createElement('div');wh.className='week-header';wh.textContent=w.title;wd.appendChild(wh);
-    w.days.forEach(d=>wd.appendChild(createDayCard(d)));
-    cnt.appendChild(wd);
-  });
+function saveProgress(k, v) {
+  const s = JSON.parse(localStorage.getItem('sp') || '{}');
+  s[k] = s[k] || {};
+  s[k].done = v;
+  localStorage.setItem('sp', JSON.stringify(s));
   updateProgress();
 }
-function init(){
-  plan.forEach((m,idx)=>{
-    const li=document.createElement('li');li.textContent=m.title;li.onclick=()=>renderMonth(idx);
-    document.getElementById('months-ul').appendChild(li);
-  });
-  const lm=localStorage.getItem('lastMonth')||0;renderMonth(parseInt(lm));
+
+function saveLink(k, v) {
+  const s = JSON.parse(localStorage.getItem('sp') || '{}');
+  s[k] = s[k] || {};
+  s[k].link = v;
+  localStorage.setItem('sp', JSON.stringify(s));
 }
-window.onload=init;
+
+function createDayCard(d) {
+  const k = `day-${d.day}`;
+  const s = JSON.parse(localStorage.getItem('sp') || '{}');
+  
+  const card = document.createElement('div');
+  card.className = 'day-card';
+  
+  const header = document.createElement('div');
+  header.className = 'day-header';
+  header.textContent = `Dia ${d.day} - ${d.topic}`;
+  
+  const toggleIcon = document.createElement('span');
+  toggleIcon.className = 'toggle-icon';
+  toggleIcon.textContent = '▶';
+  header.appendChild(toggleIcon);
+  card.appendChild(header);
+  
+  const content = document.createElement('div');
+  content.className = 'day-content';
+  
+  const detail = document.createElement('div');
+  detail.className = 'day-detail';
+  detail.textContent = d.detail;
+  content.appendChild(detail);
+  
+  const label = document.createElement('label');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.checked = s[k]?.done || false;
+  checkbox.onchange = (e) => saveProgress(k, e.target.checked);
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode('Concluído'));
+  content.appendChild(label);
+  
+  const tip = document.createElement('div');
+  tip.className = 'ai-tip';
+  tip.textContent = aiTips[d.topic] || 'Mantenha o foco e pratique regularmente!';
+  content.appendChild(tip);
+  
+  card.appendChild(content);
+  
+  header.onclick = () => {
+    const isOpen = content.classList.toggle('open');
+    toggleIcon.classList.toggle('open', isOpen);
+    localStorage.setItem('lastDay', k);
+  };
+  
+  if (localStorage.getItem('lastDay') === k) {
+    content.classList.add('open');
+    toggleIcon.classList.add('open');
+  }
+  
+  return card;
+}
+
+function updateProgress() {
+  const s = JSON.parse(localStorage.getItem('sp') || '{}');
+  let total = 0, done = 0;
+  
+  plan.forEach(m => m.weeks.forEach(w => w.days.forEach(d => {
+    total++;
+    if (s[`day-${d.day}`]?.done) done++;
+  })));
+  
+  const percentage = total ? ((done / total) * 100).toFixed(1) : 0;
+  
+  const progressElement = document.getElementById('overall-progress');
+  progressElement.textContent = `Progresso: ${done}/${total} — ${percentage}% concluído`;
+  progressElement.style.setProperty('--progress', `${percentage}%`);
+  
+  const progressFill = document.querySelector('.progress-fill');
+  if (progressFill) {
+    progressFill.style.width = `${percentage}%`;
+  }
+}
+
+function renderMonth(index) {
+  localStorage.setItem('lastMonth', index);
+  
+  // Atualiza a classe ativa nos itens do menu
+  document.querySelectorAll('#months-ul li').forEach((li, idx) => {
+    li.classList.toggle('active', idx === index);
+  });
+  
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div id="overall-progress"></div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <h2>${plan[index].title}</h2>
+  `;
+  
+  plan[index].weeks.forEach((week, weekIndex) => {
+    const weekKey = `month-${index}-week-${weekIndex}`;
+    const isWeekOpen = localStorage.getItem(weekKey) === 'open';
+    
+    const weekElement = document.createElement('div');
+    weekElement.className = 'week';
+    
+    const weekHeader = document.createElement('div');
+    weekHeader.className = 'week-header';
+    weekHeader.innerHTML = `
+      ${week.title}
+      <span class="week-toggle">▶</span>
+    `;
+    
+    const weekContent = document.createElement('div');
+    weekContent.className = 'week-content';
+    
+    week.days.forEach(day => {
+      weekContent.appendChild(createDayCard(day));
+    });
+    
+    weekElement.appendChild(weekHeader);
+    weekElement.appendChild(weekContent);
+    content.appendChild(weekElement);
+    
+    // Configura o toggle da semana
+    weekHeader.onclick = () => {
+      const isOpen = weekContent.classList.toggle('open');
+      weekHeader.querySelector('.week-toggle').classList.toggle('open', isOpen);
+      localStorage.setItem(weekKey, isOpen ? 'open' : 'closed');
+    };
+    
+    // Abre a semana se estava aberta anteriormente
+    if (isWeekOpen) {
+      weekContent.classList.add('open');
+      weekHeader.querySelector('.week-toggle').classList.add('open');
+    }
+    
+    // Anima os cards com delay
+    const dayCards = weekContent.querySelectorAll('.day-card');
+    dayCards.forEach((card, i) => {
+      card.style.animationDelay = `${i * 0.1}s`;
+    });
+  });
+  
+  updateProgress();
+}
+
+function init() {
+  // Cria os itens do menu de meses
+  const monthsList = document.getElementById('months-ul');
+  
+  plan.forEach((month, index) => {
+    const li = document.createElement('li');
+    li.textContent = month.title;
+    li.onclick = () => renderMonth(index);
+    monthsList.appendChild(li);
+  });
+  
+  // Renderiza o último mês visualizado ou o primeiro
+  const lastMonth = localStorage.getItem('lastMonth') || 0;
+  renderMonth(parseInt(lastMonth));
+  
+  // Adiciona efeito de digitação ao título
+  const header = document.querySelector('header');
+  header.classList.add('typing-effect');
+}
+
+window.onload = init;
 </script>
 </body>
 </html>
